@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <nav class="site-header sticky-top py-1 bg-dark">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+      <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle bg-dark" type="button" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="index.html">Iniciar Sesión</a>
+          <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <a class="dropdown-item" href="index.html" onclick=salir()>Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-5">
+    <div class="text-center p-4">
+      <h2>Carrito de compras</h2>
+      <p class="lead">Verás aquí tu carrito.</p>
+    </div>
+
+  <section class="section-content padding-y">
+  </section>
+  <div class="container">
+  </div>
+  <!-- hago una tabla principal que es donde se verán los productos -->
+  <div class="row">
+    <main class="col-md-9">
+      <div class="card">
+        <table class="table table-borderlight table-shopping-cart">
+          <thead class="text-light"></thead>
+          <tr class="text">
+            <th scope="col"width="100"></th>
+            <th scope="col">Descripción</th>
+            <th scope="col" width="120">Cantidad</th>
+            <th scope="col" width="150">Costo unitario</th>
+            <th scope="col" class="text-right" width="200"> </th>
+            <th scope="col" width="120">Subtotal</th>
+          </tr> 
+<!-- en tbody hago un id para traer los productos del JSON -->
+          <tbody id="container"></tbody>
+    </table>
+<!-- agrego un botón para volver a la tienda -->
+        <div class="card-body border-top">
+            <a href="#" class="btn btn-light"><i class="fa fa-chevron-left"></i>
+              Volver a la tienda              
+          </a>
+        </div>
+      </div>
+      <br>
+      <!-- agrego un formulario para los datos de envío -->
+      <div class="card-body card mb-3">
+        <form name="form" id="datosEnvio" class="form-group">
+          <h2 class="lead">Datos de envío</h2>
+          <br>
+          <div class="form-group">
+            <label>Nombre*</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="nombreEnvio">
+            </div>
+            <label>Dirección*</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="dirEnvio">
+            </div>
+            <label>Ciudad*</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="ciudadEnvio">
+            </div>
+            <label>Teléfono de contacto*</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="telEnvio">
+            </div>
+        <label class="text-label">Horario de preferencia*</label>
+        <div class="input-group">
+          <select class="form-control" id="horarioEnvio">
+            <option value="none" selected disabled hidden>Seleccioná horario</option>
+            <option value="1">Mañana (8-12)</option>
+            <option value="2">Tarde (14-18)</option>
+              </select>
+            </div>
+            <br>
+            <div class="input-group">
+              <input type="checkbox" class="form-check-input ml-1">
+              <label class="ml-4">Entregar solo al titular del envío</label>
+            </div>
+        </div>
+        <div class="input-group">
+          <input type="button" onclick="validarDatosEnvio()" class="btn btn-primary float-center" value="Guardar datos de envío">
+        </input>
+          </div>
+        </form>
+    </div>
+    </main>
+    <!-- agrego las opciones de descuento los controles de totales de precios al costado -->
+    <aside class="col md-3">
+      <div class="card mb-3">
+        <div class="card-body">
+    <!-- hago un formulario para cupones de descuento -->
+                    <form>
+            <div class="form-group">
+              <label>Agregá tu cupón</label>
+              <div class="input-group">
+                <input type="text" class="form-control" name placeholder="Código">
+                <span class="input-group-append">
+                  <button class="btn btn-primary">Aplicar</button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    <!-- hago a tarjeta para los subtotales y otros costos -->
+      <div class="card">
+        <div class="card-body">
+            <dl class="form-group">
+            <dd>Subtotal*:</dd>
+            <small class="text-muted"> *Se calcula en base a la cotización: 1USD=40UYU </small>
+            <dd class="text-right" id="subtotalgeneral"></dd>
+          </dl>
+          <form>
+            <div class="form-group">
+              <label>Elegí método de envío</label>
+              <div class="input-group">
+                <select class="form-control" id="metodo" onchange=totalEnvio() onclick="validarEnvio()">
+                  <option value="none" selected disabled hidden>Seleccioná envío</option>
+                  <option value="1">Premium (2-5 días)</option>
+                  <option value="2">Express (5-8 días)</option>
+                  <option value="3">Standard (12 a 15 días)</option>
+                    </select>
+              </div>
+            </div>
+          
+          <dl class="form-group">
+            <dd>Costo de envío:</dd>
+            <dd class="text-right" id="envio"></dd>
+          </dl>
+          <dl class="form-group">
+            <dd>Descuentos:</dd>
+            <dd class="text-right">-</dd>
+          </dl>
+          <dl class="dlist-align">
+            <dt>Total:</dt>
+            <dd class="text-right"id="total"></dd>
+          </dl>
+          <hr>
+          <div class="form-group">
+            <label>Medio de pago:</label>
+            <!-- acá podría haber puesto un "p" pero puse un input para poder cambiarle el value y hacer la validación -->
+              <input type="text" id="medioPago" value=" " disabled>
+              <button type="button" class="btn btn-light my-2" data-toggle="modal" data-target="#pagoModal">Elegí forma de pago</button>
+          </div>
+          <!-- agrego un botón para proceder con el pago que además valida el método de envío y el medio de pago-->
+          <hr>
+          <div class="input-group">
+            <input type="button" onclick="validarCampos()" class="btn btn-primary float-center" value="Ir a pagar">
+          </input>
+            </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+</form>
+<!-- modal forma de pago -->     
+<div class="modal fade" tabindex="-1" role="dialog" id="pagoModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Medios de pago</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <form id="modalForm" class="needs-validation">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="pago" id="tarjeta" value="option1">
+            <label class="form-check-label text-primary" for="tarjeta">
+              Tarjeta de crédito
+            </label>
+            <div class="form-group">
+              <label>Titular de la tarjeta</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="tarjetaName">
+              </div>
+              <label>Número de tarjeta</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="tarjetaNum">
+              </div>
+              <div class="row">
+              <div class="col">
+              <label>Código de seguridad</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="tarjetaCode">
+              </div>
+              </div>
+              <div class="col">
+                <label>Vencimiento (MM/AA)</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="tarjetaVen">
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <hr>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="pago" id="transferencia" value="option2">
+              <label class="form-check-label text-primary" for="transferencia">
+                Transferencia bancaria
+              </label>
+              <div class="form-group">
+                <label>Titular de la cuenta</label>
+                <div class="input-group" >
+                  <input type="text" class="form-control" id="transName">
+                </div>
+                <label>Banco</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="transBanc">
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="button" class="btn btn-primary float-center" id="botonModal" value="Cerrar" data-dismiss="modal">
+      </input>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+  
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <footer class="text-muted bg-light">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/dropzone.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
+</html>

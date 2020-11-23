@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>eMercado - Todo lo que busques está aquí</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+  </head>
+  <body>
+    <nav class="site-header sticky-top py-1 bg-dark">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
+        <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+        <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+        <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle bg-dark" type="button" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="index.html">Iniciar Sesión</a>
+            <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
+            <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+            <a class="dropdown-item" href="index.html" onclick=salir()>Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <body>
+      <main role="main" class="pb-5">
+        <div class="text-center p-4">
+            <h2>Comentarios</h2>
+            <p class="lead">Verás aquí todos los comentarios para el producto.</p>
+        </div>
+          <div class="container">
+              <div class="row">
+                <div class="container p-2" id="comments-list">
+                  </div>
+                  <div class="container p-2" id="comments-list-new">
+                  </div>
+            </div>
+          </div>
+            <div class="text-center p-4">
+                <h2>Agrega un comentario</h2>
+            </div>
+          <div class="container p-2"> 
+               <FORM name="form" id="formulario">
+                <div>
+                  <label class="font-weight-bold">Usuario</label>
+                  <p id="userName"></p>
+                </div>
+                  <div>
+                    <label class="font-weight-bold">Calificación</label>
+                    <select class="form-control" id="estrellas">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5" selected>5</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                  <label class="font-weight-bold">Comentario</label>
+                  <textarea class="form-control" id="comment" rows="3"></textarea>
+                  <br>
+                  <div>
+                      <input id="submitComment" type="button" class="btn btn-light btn-lg btn-block" onclick="publicarComentario();" value="Enviar"></input>
+                  </div>
+                </FORM>
+              </div>
+
+        <footer class="text-muted bg-light">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+        <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+      </div>
+    </footer>
+    <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/product-comments.js"></script>
+  </body>
+</html>
